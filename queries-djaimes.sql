@@ -38,3 +38,26 @@ select *
 from employees
 where first_name = 'Hercules'
 and last_name like 'B%';
+
+-- 6. List all employees in the Sales department, including their employee number, last name, first name, and department name.
+create view sales_employees as
+select emp_no, last_name, first_name
+from employees
+where emp_no in (
+	select emp_no
+	from dept_emp as d
+	where dept_no in (
+		select dept_no
+		from departments
+		where dept_name = 'Sales'
+	)
+);
+select s.emp_no, last_name, first_name, dept_name
+from sales_employees as s
+join dept_emp as d
+on s.emp_no = d.emp_no
+join departments
+on d.dept_no = departments.dept_no
+where dept_name = 'Sales';
+
+-- 7. 
