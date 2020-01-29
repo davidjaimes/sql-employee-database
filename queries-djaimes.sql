@@ -60,4 +60,27 @@ join departments
 on d.dept_no = departments.dept_no
 where dept_name = 'Sales';
 
--- 7. 
+-- 7. List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name.
+create view sales_develop as
+select emp_no, last_name, first_name
+from employees
+where emp_no in (
+	select emp_no
+	from dept_emp as d
+	where dept_no in (
+		select dept_no
+		from departments
+		where dept_name = 'Sales'
+		or dept_name = 'Development'
+	)
+);
+select s.emp_no, last_name, first_name, dept_name
+from sales_develop as s
+join dept_emp as d
+on s.emp_no = d.emp_no
+join departments
+on d.dept_no = departments.dept_no
+where dept_name = 'Sales'
+or dept_name = 'Development';
+
+-- 8. 
