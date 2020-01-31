@@ -2,12 +2,14 @@
 select employees.emp_no, last_name, first_name, gender, salary
 from employees
 inner join salaries
-on employees.emp_no = salaries.emp_no;
+on employees.emp_no = salaries.emp_no
+order by employees.emp_no;
 
 -- 2. List employees who were hired in 1986.
 select last_name, first_name, hire_date
 from employees
-where hire_date like '1986%';
+where hire_date like '1986%'
+order by hire_date;
 
 -- 3. List the manager of each department with the following information: department number, department name, the manager's employee number, last name, first name, and start and end employment dates.
 create view manager_list as
@@ -31,13 +33,15 @@ on employees.emp_no = dept_emp.emp_no;
 select emp_no, last_name, first_name, dept_name
 from employee_list
 inner join departments
-on employee_list.dept_no = departments.dept_no;
+on employee_list.dept_no = departments.dept_no
+order by emp_no;
 
 -- 5. List all employees whose first name is "Hercules" and last names begin with "B."
 select *
 from employees
 where first_name = 'Hercules'
-and last_name like 'B%';
+and last_name like 'B%'
+order by emp_no;
 
 -- 6. List all employees in the Sales department, including their employee number, last name, first name, and department name.
 create view sales_employees as
@@ -58,7 +62,8 @@ join dept_emp as d
 on s.emp_no = d.emp_no
 join departments
 on d.dept_no = departments.dept_no
-where dept_name = 'Sales';
+where dept_name = 'Sales'
+order by s.emp_no;
 
 -- 7. List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name.
 create view sales_develop as

@@ -1,11 +1,11 @@
 employees
 -
 emp_no PK int
-birth_date varchar(8)
+birth_date varchar(10)
 first_name varchar(30)
 last_name varchar(30)
 gender varchar(1)
-hire_date varchar(8)
+hire_date varchar(10)
 
 departments
 -
@@ -14,29 +14,29 @@ dept_name varchar(30)
 
 dept_emp
 -
-emp_no PK int FK - employees.emp_no
+emp_no int FK - employees.emp_no
 dept_no varchar(4) FK >- departments.dept_no
-from_date varchar(8)
-to_date varchar(8)
+from_date varchar(10)
+to_date varchar(10)
 
 dept_manager
 -
 dept_no varchar(4) FK >- departments.dept_no
-emp_no PK int FK - employees.emp_no
-from_date varchar(8)
-to_date varchar(8)
+emp_no int FK - employees.emp_no
+from_date varchar(10)
+to_date varchar(10)
 
 
 salaries
 -
-emp_no PK int FK - employees.emp_no
+emp_no int FK - employees.emp_no
 salary int
-from_date varchar(8)
-to_date varchar(8)
+from_date varchar(10)
+to_date varchar(10)
 
 titles
 -
 emp_no int FK - employees.emp_no
 title varchar(30)
-from_date varchar(8)
-to_date varchar(8)
+from_date varchar(10)
+to_date varchar(10)
