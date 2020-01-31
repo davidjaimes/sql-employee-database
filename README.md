@@ -114,7 +114,57 @@ and last_name like 'B%';
 ```
 
 6. List all employees in the Sales department, including their employee number, last name, first name, and department name.
+```sql
+create view sales_employees as
+select emp_no, last_name, first_name
+from employees
+where emp_no in (
+	select emp_no
+	from dept_emp as d
+	where dept_no in (
+		select dept_no
+		from departments
+		where dept_name = 'Sales'
+	)
+);
+select s.emp_no, last_name, first_name, dept_name
+from sales_employees as s
+join dept_emp as d
+on s.emp_no = d.emp_no
+join departments
+on d.dept_no = departments.dept_no
+where dept_name = 'Sales';
+```
 
 7. List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name.
+```sql
+create view sales_develop as
+select emp_no, last_name, first_name
+from employees
+where emp_no in (
+	select emp_no
+	from dept_emp as d
+	where dept_no in (
+		select dept_no
+		from departments
+		where dept_name = 'Sales'
+		or dept_name = 'Development'
+	)
+);
+select s.emp_no, last_name, first_name, dept_name
+from sales_develop as s
+join dept_emp as d
+on s.emp_no = d.emp_no
+join departments
+on d.dept_no = departments.dept_no
+where dept_name = 'Sales'
+or dept_name = 'Development';
+```
 
 8. In descending order, list the frequency count of employee last names, i.e., how many employees share each last name.
+```sql
+select last_name, count(last_name) as "Frequency Count"
+from employees
+group by last_name
+order by "Frequency Count" desc;
+```
