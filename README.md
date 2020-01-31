@@ -199,3 +199,5 @@ titles = pd.read_sql("SELECT * FROM titles", connection)
 ![histogram](images/histogram.png)
 
 3. Create a bar chart of average salary by title.
+
+![bar-chart](images/bar-chart.png)
